@@ -21,9 +21,9 @@ const createEntry = (e) => {
     }).then((result) => {
         result.json().then((entry) => {
             entries.push(entry);
-    renderEntries();
-});
-});
+            renderEntries();
+        });
+    });
 };
 
 const indexEntries = () => {
@@ -32,9 +32,9 @@ const indexEntries = () => {
     }).then((result) => {
         result.json().then((result) => {
             entries = result;
-    renderEntries();
-});
-});
+            renderEntries();
+        });
+    });
     renderEntries();
 };
 
@@ -49,14 +49,14 @@ const renderEntries = () => {
     display.innerHTML = '';
     entries.forEach((entry) => {
         const row = document.createElement('tr');
-    row.appendChild(createCell(entry.id));
-    row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
-    row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
-    display.appendChild(row);
-});
+        row.appendChild(createCell(entry.id));
+        row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
+        row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
+        display.appendChild(row);
+    });
 };
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     const createEntryForm = document.querySelector('#createEntryForm');
     createEntryForm.addEventListener('submit', createEntry);
     indexEntries();
