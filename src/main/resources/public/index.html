@@ -30,6 +30,7 @@ http://localhost:8081/login
     <script src="script.js" type="application/javascript"></script>
 </head>
 <body>
+<!--
 <form id="createEntryForm">
     <label for="checkIn">Check in</label>
     <input type="date" name="checkInDate" id="checkIn" required>
@@ -39,6 +40,33 @@ http://localhost:8081/login
     <input type="time" name="checkOutTime" required>
     <input type="submit" value="Save" />
 </form>
+-->
+
+<button onclick="toggleVisibility('registry')">Registrieren</button>
+<div id="registry">
+    <form id="createUserForm">
+        <label for="username">Username</label>
+        <input type="text" name="setUser" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="setPassword" id="password" required>
+        <input type="submit" value="Registrieren" />
+    </form>
+</div>
+<div id="verify">
+    <p>Registration Abgeschlossen</p><p>Loggin jetzt möglich</p>
+</div>
+<br>
+<button onclick="toggleVisibility('login')">Login</button>
+<div id="login">
+    <form id="logInUserForm">
+        <label for="username">Username</label>
+        <input type="text" name="logUser" id="usernameLog" required>
+        <label for="password">Password</label>
+        <input type="password" name="logPassword" id="passwordLog" required>
+        <input type="submit" value="Login" />
+    </form>
+</div>
+
 <table>
     <thead>
     <tr>

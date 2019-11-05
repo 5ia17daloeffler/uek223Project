@@ -5,6 +5,14 @@ const dateAndTimeToDate = (dateString, timeString) => {
     return new Date(`${dateString}T${timeString}`).toISOString();
 };
 
+
+/*
+document.addEventListener('DOMContentLoaded', function () {
+    const createEntryForm = document.querySelector('#createEntryForm');
+    createEntryForm.addEventListener('submit', createEntry);
+    indexEntries();
+});
+
 const createEntry = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -25,6 +33,9 @@ const createEntry = (e) => {
         });
     });
 };
+
+ */
+
 
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
@@ -50,14 +61,94 @@ const renderEntries = () => {
     entries.forEach((entry) => {
         const row = document.createElement('tr');
         row.appendChild(createCell(entry.id));
-        row.appendChild(createCell(new Date(entry.checkIn).toLocaleString()));
-        row.appendChild(createCell(new Date(entry.checkOut).toLocaleString()));
+        row.appendChild(createCell(entry.username));
+        row.appendChild(createCell(entry.password));
         display.appendChild(row);
     });
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const createEntryForm = document.querySelector('#createEntryForm');
-    createEntryForm.addEventListener('submit', createEntry);
+
+
+
+//Mine and working
+
+document.addEventListener("DOMContentLoaded", function () {
+   const createEntryForm = document.querySelector("#createUserForm");
+   createEntryForm.addEventListener("submit", createUserForm);
+   indexEntries();
+});
+
+
+const createUserForm = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const user = {};
+    user['username'] =formData.get('setUser');
+    user['password'] =formData.get('setPassword');
+
+    fetch(`${URL}/users/sign-up`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then((result) => {
+        if(result.status === 200){
+            console.log("sign-up");
+            verifyForUser()
+        }
+
+    });
+};
+
+window.onload = function () {
+    const login = document.getElementById("login");
+    const signup = document.getElementById("registry");
+    const verify = document.getElementById("verify");
+    login.style.visibility = "hidden";
+    signup.style.visibility = "hidden";
+    verify.style.visibility = "hidden";
+
+};
+
+function verifyForUser(){
+    const show = document.getElementById("verify");
+    show.style.visibility = "visible";
+}
+
+function toggleVisibility(div) {
+    const x = document.getElementById(div);
+    if (x.style.visibility === "hidden") {
+        x.style.visibility = "visible";
+    } else {
+        x.style.visibility = "hidden";
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const createEntryForm = document.querySelector("#logInUserForm");
+    createEntryForm.addEventListener("submit", logInUserForm);
     indexEntries();
 });
+
+
+const logInUserForm = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const user = {};
+    user['username'] =formData.get('logUser');
+    user['password'] =formData.get('logPassword');
+
+    fetch(`${URL}/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then((result) => {
+        if(result.status === 200){
+            console.log("loging");
+        }
+    });
+};

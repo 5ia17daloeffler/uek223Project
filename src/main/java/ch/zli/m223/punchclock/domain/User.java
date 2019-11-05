@@ -1,12 +1,6 @@
 package ch.zli.m223.punchclock.domain;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class User {
@@ -18,7 +12,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
-    private String Password;
+    private String password;
 
     public Long getId() {
         return id;
@@ -37,11 +31,11 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
 }
