@@ -27,20 +27,25 @@ public class UserController {
     }
 
     @PostMapping("/delete/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable long id) {
         applicationUserRepository.deleteById(id);
     }
+
+
 
     @PostMapping("/update")
     public void update(@RequestBody User user) {
         applicationUserRepository.save(user);
     }
 
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAllUsers() {
         return applicationUserRepository.findAll();
     }
+
+
 
 
 }

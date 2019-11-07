@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/events")
+@RequestMapping("/rollen")
 public class RolleController {
 
     private RollenRepository rollenRepository;
@@ -23,15 +23,19 @@ public class RolleController {
         rollenRepository.save(rolle);
     }
 
+
     @PostMapping("/delete/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable long id) {
         rollenRepository.deleteById(id);
     }
+
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Rolle> getAllEvents() {
         return rollenRepository.findAll();
     }
+
 }
 

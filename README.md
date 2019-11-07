@@ -13,6 +13,9 @@ Folgende Dienste stehen während der Ausführung im Profil `dev` zur Verfügung:
 - Dashboard der H2 Datenbank: http://localhost:8081/h2-console
 
 
+
+GIT Verlauf Bild in resources abgespeichert
+
 In theorie:
 - Registrieren und Anmelden von Mitgliedern
 - Erstellen und beitreten von Events
@@ -26,3 +29,26 @@ Admin als Beispielperson im script.js erstellt.
     username: admin
     password: password
 
+
+Im Postman User tested:
+Sign in:
+    http://localhost:8081/users/sign-up
+    body: {
+          	"username": "user",
+          	"password": "1234"
+          }
+
+Login:
+    http://localhost:8081/login
+    body:{
+            "username": "user",
+            "password": "1234"
+         }
+         
+get Users:
+    http://localhost:8081/users
+    header: Key             Value (Authorization fon login)
+            Authorization   Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9
+                            .eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNTczOTg2NDY5fQ.
+                            ldlNkh2Jdp39RmoUg-1byAbLhdBd3BSGw-mRSws804WR_yZ9H1Ia5opEuSkQe-
+                            vSetx6zkY93fZj5tF--RGeLA

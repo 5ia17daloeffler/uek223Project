@@ -6,37 +6,6 @@ const dateAndTimeToDate = (dateString, timeString) => {
 };
 
 
-/*
-document.addEventListener('DOMContentLoaded', function () {
-    const createEntryForm = document.querySelector('#createEntryForm');
-    createEntryForm.addEventListener('submit', createEntry);
-    indexEntries();
-});
-
-const createEntry = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const entry = {};
-    entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
-    entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-
-    fetch(`${URL}/entries`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(entry)
-    }).then((result) => {
-        result.json().then((entry) => {
-            entries.push(entry);
-            renderEntries();
-        });
-    });
-};
-
- */
-
-
 const indexEntries = () => {
     fetch(`${URL}/entries`, {
         method: 'GET'
@@ -147,34 +116,29 @@ const logInUserForm = (e) => {
         body: JSON.stringify(user)
     }).then((result) => {
         if(result.status === 200){
+            if (getToken() == null) {
+                throw new Error("No Authorization header found");
+            }
             console.log("loging");
             let token = result.headers.get("Authorization");
             console.log(token);
-            this.token.set(token)
+            setToken(token);
+
         }
     });
 };
 
-
-class  Rest {
-    constructor() {
-        this.token = localStorage.getItem("token");
-    }
-
-    get token() {
-        return this.token;
-    }
-
-    set token(token) {
-        this.token = token;
-        localStorage.setItem("token", token);
-    }
-
-    isLoggedIn() {
-        return this.token != null;
-    }
+function setToken(token) {
+    localStorage.setItem("token", token);
 }
 
+function getToken() {
+    return localStorage.getItem("token");
+}
+
+function isLoggedIn() {
+    return localStorage.getItem("token") != null;
+}
 
 window.onload = function testData() {
     const user = {};

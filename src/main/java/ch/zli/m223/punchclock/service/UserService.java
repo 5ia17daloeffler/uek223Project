@@ -6,7 +6,7 @@ import ch.zli.m223.punchclock.repository.ApplicationUserRepository;
 import org.jvnet.hk2.annotations.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class UserService {
