@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     indexEntries();
 });
 
-
 const logInUserForm = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -149,6 +148,48 @@ const logInUserForm = (e) => {
     }).then((result) => {
         if(result.status === 200){
             console.log("loging");
+            let token = result.headers.get("Authorization");
+            console.log(token);
+            this.token.set(token)
+        }
+    });
+};
+
+
+class  Rest {
+    constructor() {
+        this.token = localStorage.getItem("token");
+    }
+
+    get token() {
+        return this.token;
+    }
+
+    set token(token) {
+        this.token = token;
+        localStorage.setItem("token", token);
+    }
+
+    isLoggedIn() {
+        return this.token != null;
+    }
+}
+
+
+window.onload = function testData() {
+    const user = {};
+    user['username'] = "admin";
+    user['password'] = "password";
+
+    fetch(`${URL}/users/sign-up`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then((result) => {
+        if(result.status === 200){
+            console.log("Admin Created");
         }
     });
 };
